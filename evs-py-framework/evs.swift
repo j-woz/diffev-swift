@@ -1,6 +1,7 @@
 
 import files;
 import io;
+import location;
 import python;
 import string;
 
@@ -30,6 +31,28 @@ from diffev import *
 repr(diffev_init())
 ----
 );
+}
+
+(string s) diffev_komando(string command)
+{
+  template =
+----
+from diffev import *
+repr(diffev_komando('%s'))
+----;
+  code = sprintf(template, command);
+  s = python(code);
+}
+
+(string s) diffev_komando_location(string command, location L)
+{
+  template =
+----
+from diffev import *
+repr(diffev_komando('%s'))
+----;
+  code = sprintf(template, command);
+  s = @location=L python(code);
 }
 
 (string s) discus_run(int members, int parameters,
@@ -66,6 +89,14 @@ global const int CYCLES = 3;
 
 main
 {
+  location compare_process = location_from_rank(1);
+  diffev_komando("@add.mac", compare_process) =>
+    diffev_komando("eval i[0]", location_from_rank(2)); // compare_process);
+}
+
+/*
+main
+{
   string init_data = diffev_init();
   // printf("init_data: %s", init_data);
 
@@ -89,4 +120,6 @@ main
       wait(kuplot_outputs) { v[cycle+1] = touch(); }
     }
   }
+  write_state();
 }
+*/
