@@ -1,0 +1,11 @@
+#!/bin/bash
+
+OUTPUT=$1
+
+MEMBERS=3
+PARAMETERS=3
+
+{
+  echo "MEMBERS: ${MEMBERS}"
+  echo "PARAMETERS: ${PARAMETERS}"
+} > ${OUTPUT}
