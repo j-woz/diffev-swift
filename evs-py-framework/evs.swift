@@ -1,27 +1,59 @@
 
 import files;
 import io;
+import python;
 import string;
 import unix;
 
-app (file o) diffev_init()
+(string value) python_getkey(string python_dict, string key)
 {
-  "./diffev_init.sh" o;
+  // Escape ' characters for Python evaluation
+  escaped_dict = replace_all(python_dict, "'", "\\'", 0);
+  template =
+----
+_d = eval(\"%s\")
+repr(_d['%s'])
+----;
+  code = sprintf(template, escaped_dict, key);
+  value = python(code);
 }
 
-app (file o) discus_run(int members, int parameters,
+(string o) diffev_init()
+{
+  o = python(
+----
+from diffev import * 
+repr(diffev_init())
+----
+);
+}
+
+(string s) discus_run(int members, int parameters,
+                      int cycle, int member)
+{
+  template =
+----
+from diffev import *
+repr(discus(%s,%s,%s,%s))
+----;
+  code = sprintf(template, members, parameters, cycle, member);
+  s = python(code);
+}
+
+(string s) kuplot_run(string discus_output, int members, int parameters,
                         int cycle, int member)
 {
-  "./discus_run.sh" o members parameters cycle member;
+   template =
+----
+from diffev import *
+repr(kuplot(%s,%s,%s,%s,%s))
+----;
+   // discus_output,
+   code = sprintf(template, discus_output, members, parameters, cycle, member);
+   s = python(code);
 }
 
-app (file o) kuplot_run(file discus_output, int members, int parameters,
-                        int cycle, int member)
-{
-  "./kuplot_run.sh" o discus_output members parameters cycle member;
-}
-
-app (file o) summarize(file kuplot_outputs[])
+app (file o) summarize(string kuplot_outputs[])
 {
   "./kuplot_summarize.sh" o kuplot_outputs;
 }
@@ -30,31 +62,27 @@ global const int CYCLES = 3;
 
 main
 {
-  file init_data<"init.data"> = diffev_init();
+  string init_data = diffev_init();
+  // printf("init_data: %s", init_data);
 
-  int members;
-  string t[] = split(read(init_data), "\n");
-  string m[] = split(t[0], " ");
-  members = toint(m[1]);
-  string p[] = split(t[1], " ");
-  parameters = toint(p[1]);
-  printf("members: %i parameters: %i", members, parameters);
+  int members = toint(python_getkey(init_data, "members"));
+  int parameters = toint(python_getkey(init_data, "parameters"));
+  // printf("members: %i parameters: %i", members, parameters);
 
   file v[];
   v[0] = touch();
-  
   for (int cycle = 0; cycle < CYCLES; cycle = cycle + 1)
   {
     wait (v[cycle])
     {
-      file kuplot_outputs[];
+      string kuplot_outputs[];
       foreach member in [0:members-1]
       {
-        file discus_output = discus_run(members, parameters, cycle, member);
-        kuplot_outputs[member] =
+       string discus_output = discus_run(members, parameters, cycle, member);
+       kuplot_outputs[member] =
           kuplot_run(discus_output, members, parameters, cycle, member);
       }
-      v[cycle+1] = summarize(kuplot_outputs);
+      wait(kuplot_outputs) { v[cycle+1] = touch(); }
     }
   }
 }

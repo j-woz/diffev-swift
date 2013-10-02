@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
-stc -u evs.swift
+stc -pu evs.swift
 turbine evs.tcl
