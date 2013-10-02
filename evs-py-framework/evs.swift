@@ -3,7 +3,11 @@ import files;
 import io;
 import python;
 import string;
-import unix;
+
+app (file o) touch()
+{
+  "touch" o;
+}
 
 (string value) python_getkey(string python_dict, string key)
 {
