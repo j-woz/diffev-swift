@@ -1,0 +1,22 @@
+#
+@discus_variables.mac
+@discus_setup.mac
+#
+#
+generation = i[201]
+member     = i[202]
+children   = i[203]
+parameters = i[204]
+kid        = i[205]
+indiv      = i[206]
+#
+#
+read
+   cell  CELL/fec.cell, dimen,dimen,1
+b[1] = r[203]
+#
+replace fe,c,all,0.25
+therm 2d
+#
+@discus_sort.mac r[201],r[202]
+@discus_fourier.mac kid,indiv

@@ -1,0 +1,24 @@
+#
+nbox = dimen*dimen/sbox/sbox*over
+fourier
+  neut
+  ll  0.0, 0.0,0.0
+  lr  4.0, 0.0,0.0
+  ul  0.0, 4.0,0.0
+  na 201
+  no 201
+  abs  h
+  ord  k
+  temp ign
+  disp off
+  lots box, sbox,sbox,1,nbox,yes
+  set aver, 10.
+  show
+  run
+exit
+output
+  outfile "CALC/calc.%4D.%4D",$1,$2
+  value   inte
+  form    stan
+  run
+exit

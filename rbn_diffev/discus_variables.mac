@@ -1,0 +1,12 @@
+#
+variable integer,generation
+variable integer,member
+variable integer,children
+variable integer,parameters
+variable integer,kid
+variable integer,indiv
+#
+variable integer,dimen
+variable integer,nbox  ! Number of lots
+variable integer,sbox  ! size of a lot in unit cells
+variable integer,over  ! Oversampling of the crystal >= 1
