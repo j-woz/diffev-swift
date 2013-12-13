@@ -1,10 +1,10 @@
-This directory contains a working example for a refinement of single cystal 
+This directory contains a working example for a refinement of single cystal
 data through SWIFT.
 
 ================================================================================
 A list of files follows later on.
 
-To control the amount of work to be performed, respectively the amount of 
+To control the amount of work to be performed, respectively the amount of
 parallel work the following values should be edited:
 
 File diffev_setup.mac, lines 3, 4
@@ -19,19 +19,19 @@ File discus_setup.mac, dimen= 50 ! Size of simulated crystal
                        over =  1 ! Oversampling of model crystal
 
 The values of pop_c and nindiv determine the number of calls to DISCUS,
-that could be done in parallel. DISCUS is executesd pop_c * nindiv times.
+that could be done in parallel. DISCUS executes pop_c * nindiv times.
 For the current refinement nindiv = 1 is just fine, as a single calculation
-is a good representation of the actual refinement parameters. Thus the 
-problem will mostly scale with the size of the population pop_c. 
+is a good representation of the actual refinement parameters. Thus the
+problem will mostly scale with the size of the population pop_c.
 pop_c and pop_n are not required to be of identical size. pop_n is the
 population size that survives into the next generation. If pop_c is larger
-than pop_n, more members of the population are "killed" befor the next 
-generation. This increases the "evolutionary" pressure and wil force 
+than pop_n, more members of the population are "killed" before the next
+generation. This increases the "evolutionary" pressure and wil force
 faster convergence, yet risks convergence into a false minimum...
 
 The parameters in discus_setup.mac will determine how good the final
 aggreement can be. Especially a larger crystal size, coupled with an
-oversampling of more than one will yield a better fit. This will cost 
+oversampling of more than one will yield a better fit. This will cost
 more computing time, but all of this is in parts of the code that cannot be
 done in paralell (yet).
 
@@ -97,9 +97,9 @@ GENERATION         ! This file informs the user about the current generation num
 # KUPLOT macros to display the refinement status
 #
 kpara.mac          ! plots the development of the cost function or a parameter
-                   ! use as: 
-                   ! @kpara.mac 0       
-                   ! plots the development of R-value, shows best, worst and 
+                   ! use as:
+                   ! @kpara.mac 0
+                   ! plots the development of R-value, shows best, worst and
                    ! average r-value
                    !
                    ! @kpara.mac 1   ! or 2 or 3
@@ -111,22 +111,22 @@ kpar_par.mac       ! Plots correlations between parameters
                    ! @kpar_par.mac <generation>, <para_1>, <para_2>
                    !
                    ! @kpar_par.mac -1, 1,0
-                   ! This will plot the correlation between parameter 1 and 
+                   ! This will plot the correlation between parameter 1 and
                    ! parameter 0 (=r-value==Cost function) in generation -1
                    ! i.e. the current last generation
                    ! Red dots are children of current population, blue dot is
                    ! the current best member and black dots are trial values
                    ! for the next generation
-                   ! Try as 
+                   ! Try as
                    ! @kpar_par -1, 1, 0
                    ! @kpar_par -1, 2, 0
                    ! @kpar_par -1, 3, 0
                    !
                    ! @kpar_par -1, 1, 2 ! Correlation between params 1 and 2
-                   !                      Should be an irregularly shaped cloud, 
+                   !                      Should be an irregularly shaped cloud,
                    !
                    ! @kpar_par  0, 1, 0 ! Does not work, a bug I need to fix...
 
-ksingle.mac        ! Plots the experimental data in comparison to calculated 
+ksingle.mac        ! Plots the experimental data in comparison to calculated
                    ! @ksingle.mac 1    ! plot the current best solution
                    ! @ksingle.mac 2    ! plot the current second best solution
