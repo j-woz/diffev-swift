@@ -6,7 +6,7 @@ import files;
 import stats;
 import sys;
 
-// 
+//
 // Define interface functions to python
 //
 
@@ -95,7 +95,7 @@ repr(diffev_compare('%d', '%d'))
 //
 // Perform a single DISCUS calculation for child "kid" and individual "indiv"
 
-(string p) discus_calc(int generation, int member, int children, 
+(string p) discus_calc(int generation, int member, int children,
                        int parameters, int kid,    int indiv,
                        string trial_kid )
 {
@@ -147,27 +147,16 @@ repr(kuplot_sel('%d', '%d'))
    kuplot_bck = toint(substring(erg,1,strlen(erg)-2));
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//  Define LEAF functions for 
-//  discus_run
-//  kuplot_run
-//  diffev_compare
-//
-// ????????????????????????????????????????????????????????????????????????????
-// The appear not to be real leaf functions, as the instruction "@dispatch=LEAF"
-// gives an error message. Will it be more efficient, if these are written as
-// tcl code??
-
 //
 // DISCUS_RUN *****************************************************************
 //
 // Loop over all children and individual repetions
 // ????????????????????????????????????????????????????????????????????????????
-// To synchronize to kuplot _rvalue I collect the return value for all 
+// To synchronize to kuplot _rvalue I collect the return value for all
 // individual repetitions into array "col" and sum up this array into entry
 // "kid" in the result function discus_res[]
 // It seems to ensure that kuplot_res is started after an entry discus_res[kid]
-// is set. 
+// is set.
 // As all individual repetitions receive the same trial values, "line" is done
 // once in the "kid" loop
 
@@ -181,7 +170,7 @@ repr(kuplot_sel('%d', '%d'))
        foreach indiv in [0:nindiv-1]
        {
           string erg[];
-          erg [indiv] = discus_calc(generation, member, children, 
+          erg [indiv] = discus_calc(generation, member, children,
                                     parameters, kid+1, indiv+1,line);
           col [indiv] = toint(substring(erg[indiv],1,strlen(erg[indiv])-2));
        }
@@ -200,7 +189,7 @@ repr(kuplot_sel('%d', '%d'))
 {
     foreach kid in [0:children-1]
     {
-       kuplot_res[kid] = kuplot_rvalue(generation, member, children, 
+       kuplot_res[kid] = kuplot_rvalue(generation, member, children,
                                        parameters, kid+1, nindiv,
                                        discus_res[kid]);
     }
@@ -213,7 +202,7 @@ repr(kuplot_sel('%d', '%d'))
 // kuplot to diffev.
 //?????????????????????????????????????????????????????????????????????????????
 // I had to choose a loop, as I did not find a SWIFT way to convert the array
-// "kuplot_res" into a single string and hand down this string to python, 
+// "kuplot_res" into a single string and hand down this string to python,
 // respectively DIFFEV, where the string might be broken down at compiler spped
 //
 
@@ -231,9 +220,9 @@ repr(kuplot_sel('%d', '%d'))
 //
 // DIFFEV_CMP *****************************************************************
 //
-// Do the diffev "compare" command 
+// Do the diffev "compare" command
 // ????????????????????????????????????????????????????????????????????????????
-// Here it is probably more efficient to integrate the function 
+// Here it is probably more efficient to integrate the function
 // "diffev_compare" directly at this location rather than to have a seperate
 // function... This just grew...
 //
@@ -260,7 +249,7 @@ repr(kuplot_sel('%d', '%d'))
 //
 // ????????????????????????????????????????????????????????????????????????????
 // I took this out of main, to "ease" synchronization. do_cycle returns the
-// current best r-value, which I use within the loop in main for 
+// current best r-value, which I use within the loop in main for
 // synchronization
 
 (float best ) do_cycle( int generation, int member, int children,
@@ -269,12 +258,12 @@ repr(kuplot_sel('%d', '%d'))
 {
        string trials = diffev_trial(children, parameters, current,
                                     diffev_process);
-     
-       string trial_array[] = split( 
+
+       string trial_array[] = split(
                                     substring( trials, 1, strlen(trials)-1),
                                     "D"
                                    );
-  
+
        int    discus_res[];
        string kuplot_res[];
        int    diffev_res[];
@@ -290,19 +279,15 @@ repr(kuplot_sel('%d', '%d'))
 //  END definition of leaf functions
 //
 
-global const int CYCLES = 100;
-
 main
 {
 //  int generation;    // In line comment
   int member;
   int children;
   int parameters;
-  //
-  // get command line argument -cycles=CYCLES
-  //  int CYCLES = toint(argv("cycles"));
-  // ??????????????????????????????????????????????????????????????????????????
-  // turbine complaines if I add a "-cycles=4" to the line in run.sh
+  int CYCLES = toint(argv("cycles"));
+  // RBN: turbine complaines if I add a "-cycles=4" to the line in run.sh
+  // JMW: Arguments to this Swift program have to be after refine.tcl
 
   // Define "diffev_process" as location of DIFFEV, needs to refer to this
   // process all the time
@@ -312,11 +297,11 @@ main
   // Returns a Python tuple with (gen, mem, child, para)
   //
   string population = diffev_init("@diffev_start.mac", diffev_process);
-  printf(" POPULATION %s \n",population); 
+  printf(" POPULATION %s \n",population);
 
   string g[]  = split(
                       substring(population, 1, strlen(population)-1),
-                       "D" 
+                       "D"
                      );
 
 //  generation  = toint( g[0]) ;
@@ -324,7 +309,7 @@ main
   children    = toint( g[2]) ;
   parameters  = toint( g[3]) ;
   nindiv      = toint( g[4]) ;
-  
+
 
   // Here the loop over all refinement cycles begins
   // Tasks in each cycle are:
