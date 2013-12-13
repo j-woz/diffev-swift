@@ -204,7 +204,7 @@ repr(kuplot_sel('%d', '%d'))
 // I had to choose a loop, as I did not find a SWIFT way to convert the array
 // "kuplot_res" into a single string and hand down this string to python,
 // respectively DIFFEV, where the string might be broken down at compiler spped
-//
+// JMW: Try string_join()?
 
 (int    diffev_res[]) diffev_run(int children, string kuplot_res[], location L)
 {
