@@ -204,7 +204,7 @@ repr(kuplot_sel('%d', '%d'))
 // I had to choose a loop, as I did not find a SWIFT way to convert the array
 // "kuplot_res" into a single string and hand down this string to python,
 // respectively DIFFEV, where the string might be broken down at compiler spped
-// JMW: Try string_join()?
+// JMW: Try string_join()? Cf ./example.swift
 
 (int    diffev_res[]) diffev_run(int children, string kuplot_res[], location L)
 {
@@ -275,9 +275,9 @@ repr(kuplot_sel('%d', '%d'))
        kuplot_bck  = kuplot_sel(children,   diffev_res);
               best = diffev_cmp(generation, kuplot_bck, diffev_process);
 }
-//
-//  END definition of leaf functions
-//
+
+//  END definition of Swift composite functions
+
 
 main
 {
@@ -310,6 +310,8 @@ main
   parameters  = toint( g[3]) ;
   nindiv      = toint( g[4]) ;
 
+  printf("member:   %i", member);
+  printf("children: %i", children);
 
   // Here the loop over all refinement cycles begins
   // Tasks in each cycle are:
