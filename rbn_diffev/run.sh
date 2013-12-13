@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+mkdir -p CALC
+
 stc -pu refine.swift
 export PYTHONPATH=${PYTHONPATH}:${PWD}
 # Disable debugging:
