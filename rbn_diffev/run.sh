@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+# Create directories required by the application:
 mkdir -p CALC DIFFEV
 
 stc -pu refine.swift
@@ -7,6 +8,7 @@ export PYTHONPATH=${PYTHONPATH}:${PWD}
 
 export TURBINE_LOG=1 TURBINE_DEBUG=0
 
+# Create an output file with an unused random number
 REFINE_OUT=""
 while (( 1 ))
 do
