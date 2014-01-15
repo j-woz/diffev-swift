@@ -1,0 +1,3 @@
+# Exit discus after other macros
+# Example usage: discus cleanup.mac x.mac
+exit
