@@ -1,0 +1,9 @@
+.gitignore
+refine.tcl
+# Some kind of Fortran output
+fort.*
+# Swift log
+adlb.clog2
+
+# Application output:
+GENERATION
