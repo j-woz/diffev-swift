@@ -16,3 +16,4 @@ sys rm -f TEMP/*
 sys rm -f STRU/*
 sys rm -f CALC/calc.*
 sys rm -f *.bs
+sys rm -f refine-*.out
