@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Create directories required by the application:
-mkdir -p CALC DIFFEV
+mkdir -p CALC DIFFEV FINAL
 
 stc -pu refine.swift
 export PYTHONPATH=${PYTHONPATH}:${PWD}
