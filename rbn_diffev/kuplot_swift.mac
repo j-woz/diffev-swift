@@ -1,4 +1,5 @@
-set prompt,redirect
+#set prompt,redirect, on   ! Turns standard IO on
+set prompt,redirect, off    ! Turns standard IO off
 set error,exit
 #@ HEADER
 #@ NAME         ref.ex0.kup.diffev.mac

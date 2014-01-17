@@ -1,4 +1,6 @@
 #
+#set prompt, redirect,on   ! Turns standard IO on
+set prompt, redirect,off    ! Turns standard IO off
 @discus_variables.mac
 @discus_setup.mac
 #
