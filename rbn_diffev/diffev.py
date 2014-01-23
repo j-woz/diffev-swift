@@ -55,7 +55,7 @@ def diffev_init(command):
 # a single "P" the parameters within a child
 #
 def diffev_trial(children,parameters, current):
-    trial = numpy.array(diffev.diffev.trial(children, parameters))
+    trial = numpy.array(diffev.diffev.send_trial(children, parameters))
     s = "  "
     for kid in range(int(children)):
        for par in range(int(parameters)):
