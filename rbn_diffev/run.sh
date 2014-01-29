@@ -12,7 +12,6 @@ CYCLES=$1
 mkdir -p CALC DIFFEV FINAL
 
 stc -pu refine.swift
-export PYTHONPATH=${PYTHONPATH}:${PWD}
 
 # Logging/debugging off by default:
 export TURBINE_LOG=${TURBINE_LOG:-0}
@@ -26,6 +25,9 @@ do
   REFINE_OUT=refine-${RANDOM}.out
   [[ ! -f ${REFINE_OUT} ]] && break
 done
+
+export PYTHONPATH=${PYTHONPATH}:${PWD}
+export LD_LIBRARY_PATH=${PWD}
 
 turbine -l -n 3 refine.tcl --cycles=${CYCLES} |& tee ${REFINE_OUT}
 echo "logged to: ${REFINE_OUT}"
