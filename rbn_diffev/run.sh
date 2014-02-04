@@ -33,8 +33,10 @@ export LD_LIBRARY_PATH=${PWD}
 {
   echo ${REFINE_OUT}
   date
+  which python
+  echo "PYTHONPATH: ${PYTHONPATH}"
   echo
-} > ${REFINE_OUT}
+} >& ${REFINE_OUT}
 
 turbine -l -n 3 refine.tcl --cycles=${CYCLES} |& tee -a ${REFINE_OUT}
 echo "logged to: ${REFINE_OUT}"
