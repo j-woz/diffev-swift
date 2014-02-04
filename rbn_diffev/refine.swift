@@ -36,6 +36,7 @@ repr(diffev_kommando('%s'))
    template =
 ----
 from diffev import *
+from wrappers import *
 repr(diffev_init('%s'))
 ----;
    code = sprintf(template, command);
@@ -52,6 +53,7 @@ repr(diffev_init('%s'))
    template =
 ----
 from diffev import *
+from wrappers import *
 repr(diffev_trial('%d', '%d', '%f'))
 ----;
    code = sprintf(template, children, parameters, current);
@@ -68,6 +70,7 @@ repr(diffev_trial('%d', '%d', '%f'))
    template =
 ----
 from diffev import *
+from wrappers import *
 repr(diffev_rvalue('%d', %s))
 ----;
    code = sprintf(template, kid, rvalue);
@@ -84,6 +87,7 @@ repr(diffev_rvalue('%d', %s))
    template =
 ----
 from diffev import *
+from wrappers import *
 repr(diffev_compare('%d', '%d'))
 ----;
    code = sprintf(template, generation, all_kids );
@@ -102,6 +106,7 @@ repr(diffev_compare('%d', '%d'))
    template =
 ----
 from discus import *
+from wrappers import *
 repr(discus_calc('%d', '%d', '%d', '%d', '%d', '%d', '%s'))
 ----;
    code = sprintf(template, generation,member,children,
@@ -122,6 +127,7 @@ repr(discus_calc('%d', '%d', '%d', '%d', '%d', '%d', '%s'))
    template =
 ----
 from kuplot import *
+from wrappers import *
 repr(kuplot_rvalue('%d', '%d', '%d', '%d', '%d', '%d',  '%s' ))
 ----;
    code = sprintf(template, generation,member,children,
@@ -139,6 +145,7 @@ repr(kuplot_rvalue('%d', '%d', '%d', '%d', '%d', '%d',  '%s' ))
    template =
 ----
 from kuplot import *
+from wrappers import *
 repr(kuplot_sel('%d', '%d'))
 ----;
    int all_kids    = sum_integer(diffev_res);

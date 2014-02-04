@@ -1,6 +1,6 @@
 import numpy
 import lib_kuplot as kuplot
-
+import wrappers
 
 #
 # PYTHON function kuplot_rvalue
@@ -22,7 +22,7 @@ def kuplot_rvalue(generation, member, children, parameters, kid, nindiv,discus_k
 #
 # PYTHON function kuplot_sel
 #
-# Interface to the standardized macro "kup.select.mac" that does a 
+# Interface to the standardized macro "kup.select.mac" that does a
 # backup of the current best solutions
 #
 def kuplot_sel(children, diffev_res):
