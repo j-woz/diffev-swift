@@ -38,7 +38,7 @@ export LD_LIBRARY_PATH=${PWD}
   echo
 } >& ${REFINE_OUT}
 
-turbine -l -n 3 refine.tcl --cycles=${CYCLES} |& tee -a ${REFINE_OUT}
+turbine -l -n ${PROCS} refine.tcl --cycles=${CYCLES} |& tee -a ${REFINE_OUT}
 echo "logged to: ${REFINE_OUT}"
 
 if grep -q APPL ${REFINE_OUT}
