@@ -1,12 +1,13 @@
 #!/bin/bash -e
 
-if [[ ${#*} != 1 ]]
+if [[ ${#*} != 2 ]]
 then
-  echo "requires argument: cycles"
+  echo "usage: run <PROCS> <CYCLES>"
   exit 1
 fi
 
-CYCLES=$1
+PROCS=$1
+CYCLES=$2
 
 # Create directories required by the application:
 mkdir -p CALC DIFFEV FINAL
@@ -14,7 +15,7 @@ mkdir -p CALC DIFFEV FINAL
 stc -pu refine.swift
 
 # Logging/debugging off by default:
-export TURBINE_LOG=${TURBINE_LOG:-0}
+export TURBINE_LOG=${TURBINE_LOG:-1}
 export TURBINE_DEBUG=${TURBINE_DEBUG:-0}
 export ADLB_DEBUG=${ADLB_DEBUG:-0}
 
@@ -29,5 +30,17 @@ done
 export PYTHONPATH=${PYTHONPATH}:${PWD}
 export LD_LIBRARY_PATH=${PWD}
 
-turbine -l -n 3 refine.tcl --cycles=${CYCLES} |& tee ${REFINE_OUT}
+{
+  echo ${REFINE_OUT}
+  date
+  echo
+} > ${REFINE_OUT}
+
+turbine -l -n 3 refine.tcl --cycles=${CYCLES} |& tee -a ${REFINE_OUT}
 echo "logged to: ${REFINE_OUT}"
+
+if grep -q APPL ${REFINE_OUT}
+then
+  echo "FOUND ERRORS!"
+  exit 1
+fi
