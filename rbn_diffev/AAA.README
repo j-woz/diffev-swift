@@ -33,7 +33,7 @@ The parameters in discus_setup.mac will determine how good the final
 aggreement can be. Especially a larger crystal size, coupled with an
 oversampling of more than one will yield a better fit. This will cost
 more computing time, but all of this is in parts of the code that cannot be
-done in paralell (yet).
+done in parallel (yet).
 
 In order to test SWIFT in parallel, leave discus_setup.mac as is, nindiv=1
 and increase pop_n and pop_c
