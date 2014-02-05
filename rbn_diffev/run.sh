@@ -12,7 +12,9 @@ CYCLES=$2
 # Create directories required by the application:
 mkdir -p CALC DIFFEV FINAL
 
+echo "STC..."
 stc -pu refine.swift
+echo "STC done."
 
 # Logging/debugging off by default:
 export TURBINE_LOG=${TURBINE_LOG:-1}
@@ -38,6 +40,7 @@ export LD_LIBRARY_PATH=${PWD}
   echo
 } >& ${REFINE_OUT}
 
+echo "Turbine..."
 turbine -l -n ${PROCS} refine.tcl --cycles=${CYCLES} |& tee -a ${REFINE_OUT}
 echo "logged to: ${REFINE_OUT}"
 
