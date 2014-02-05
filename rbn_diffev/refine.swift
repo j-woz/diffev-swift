@@ -298,7 +298,9 @@ main
 
   // Define "diffev_process" as location of DIFFEV, needs to refer to this
   // process all the time
-  location diffev_process = location_from_rank(1);
+  int rank = 1;
+  location diffev_process = location_from_rank(rank);
+  printf("diffev_process: %i", rank);
 
   // Initialize DIFFEV, currently with fixed macro file name
   // Returns a Python tuple with (gen, mem, child, para)
