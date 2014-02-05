@@ -19,16 +19,14 @@ main
 {
   assert(turbine_workers() >= 4, "Must have at least 4 workers!");
 
-  location L1 = location_from_rank(1);
-  location L2 = location_from_rank(2);
-  location L3 = location_from_rank(3);
-  location L4 = location_from_rank(4);
+  L1 = location_from_rank(1);
+  L2 = location_from_rank(2);
+  L3 = location_from_rank(3);
+  L4 = location_from_rank(4);
 
   printf("HELLO");
   printf(@location=L2 python("\"2\""));
   printf(@location=L3 python("\"3\""));
 
   f(L4, 4);
-
-  // printf(python("import numpy\n\"s\""));
 }
