@@ -1,16 +1,15 @@
-#set prompt,redirect, on   ! Turns standard IO on
-set prompt,redirect, off    ! Turns standard IO off
+set prompt,redirect, on    ! Turns standard IO off
 set error,exit
 #@ HEADER
 #@ NAME         ref.ex0.kup.diffev.mac
-#@ 
+#@
 #@ KEYWORD      refinement, average, rvalue
-#@ 
+#@
 #@ DESCRIPTION  This macro calculates the r-Values for all children
 #@
 #@ PARAMETER    $0, 0
 #@
-#@ USAGE        @ref.ex0.kup.diffev 
+#@ USAGE        @ref.ex0.kup.diffev
 #@
 #@ END
 ################################################################################
@@ -38,7 +37,7 @@ nindiv     = i[206]
 #
 #
 rese
-system "cp CALC/calc.%4D.0001 CALC/calc.%4D",kid,kid
+system "cp -v CALC/calc.%4D.0001 CALC/calc.%4D",kid,kid
 do indiv = 2, nindiv
   reset
   load ni, "CALC/calc.%4D",kid
@@ -49,7 +48,7 @@ do indiv = 2, nindiv
      form ni
      run
 enddo
-  reset 
+  reset
   load ni, DATA/experimental.inte
   load ni, "CALC/calc.%4D",kid
   match all,1,2
@@ -59,4 +58,4 @@ enddo
   fformat 1,i5
   fformat 2,f15.9
   fput   2,kid,res[2]
-  fclose 2  
+  fclose 2

@@ -1,4 +1,4 @@
-set prompt,redirect
+set prompt,redirect,on
 set error,exit
 #@kup_backup.mac compare
 @kup.backup.mac best

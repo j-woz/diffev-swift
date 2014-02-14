@@ -1,7 +1,7 @@
 pop_gen[1]  =   0
 #
 pop_n[1]    =  21
-pop_c[1]    =  21
+pop_c[1]    =  84
 pop_dimx[1] =   3
 #
 # order parameter [100]
@@ -30,7 +30,7 @@ pop_lsig[2] =     0.0100
 adapt   sigma,  2,0.2
 adapt   lsig ,  2,0.02
 #
-# Atomic displacement parameter 
+# Atomic displacement parameter
 #
 pop_name    3,adp
 type real,3
