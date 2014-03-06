@@ -6,14 +6,15 @@ set -e
 
 DIFFUSE=${HOME}/proj/x86/diffuse/build
 
-if [[ ${#*} != 2 ]]
+if [[ ${#*} != 3 ]]
 then
-  echo "usage: run-tukey <procs> <cycles>"
+  echo "usage: run-tukey <procs> <cycles> <pop_c>"
   exit 1
 fi
 
 PROCS=$1
 CYCLES=$2
+export POP_C=$3
 
 export QUEUE=${QUEUE:-default}
 export PPN=${PPN:-3}
@@ -49,7 +50,10 @@ export MODE=cluster
 export PROJECT=ExM
 export ADLB_PRINT_TIME=1
 
-turbine-cobalt-run.zsh -V -t 00:${WT}:00 -n ${PROCS} \
+# Substitute on POP_C
+m4 < diffev_setup.mac.m4 > diffev_setup.mac
+
+turbine-cobalt-run.zsh -t 00:${WT}:00 -n ${PROCS} \
   -i ${PWD}/turbine-init.sh \
   -e PYTHONPATH=${PYTHONPATH} \
   -e LD_LIBRARY_PATH=${LD_LIBRARY_PATH} \
