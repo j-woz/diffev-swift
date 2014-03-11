@@ -51,7 +51,7 @@ def diffev_init(command):
 # Gets the current trial parameters from DIFFEV
 #
 # Return value is a string of trial parameters
-# A single "D" separates the children, 
+# A single "D" separates the children,
 # a single "P" the parameters within a child
 #
 def diffev_trial(children,parameters, current):
@@ -74,6 +74,7 @@ def diffev_trial(children,parameters, current):
 def diffev_rvalue(kid, rvalue):
     command = 'child_val['+str(kid)+'+1] = ' + rvalue
     ier = diffev.diffev.command(command)
+    print "diffev_rvalue: command ok"
     return str(kid)
 
 #
@@ -83,7 +84,7 @@ def diffev_rvalue(kid, rvalue):
 #
 # The rvalues must have been sent to diffev prior to this
 # function
-# 
+#
 # Returns the current best rvalue
 #
 # Commented line are for debugging to ensure that the cylcles
@@ -103,3 +104,5 @@ def diffev_compare(generation, all_kids):
 #   ier = diffev.diffev.command("fput  1, i[200], i[201], r[201]")
 #   ier = diffev.diffev.command("fclose 1")
     return str(bestr[0])
+
+import wrappers

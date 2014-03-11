@@ -15,3 +15,4 @@ set c [ blobutils_get_float $c_ptr 0 ]
 puts "a: $a"
 puts "b: $b"
 puts "c: $c"
+

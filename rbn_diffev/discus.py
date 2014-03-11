@@ -10,6 +10,8 @@ import lib_discus as discus
 # Return value is the kid number
 #
 def discus_calc(generation, member, children, parameters, kid, indiv,trial_kid ):
+    print "python: discus_calc(generation=%s, member=%s)" % \
+                              (generation,    member)
     sender = numpy.array([generation, member, children, parameters, kid, indiv ])
     ier = discus.discus.send_i(sender,201,206)
 #
@@ -22,3 +24,4 @@ def discus_calc(generation, member, children, parameters, kid, indiv,trial_kid )
     discus.discus.command(command)
     return str(kid)
 
+import wrappers

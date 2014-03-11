@@ -30,3 +30,4 @@ def kuplot_sel(children, diffev_res):
     ier = kuplot.kuplot.command(command)
     return str(diffev_res)
 
+import wrappers
