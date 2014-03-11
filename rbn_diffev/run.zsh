@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/zsh -e
 
 if [[ ${#*} != 2 ]]
 then
@@ -38,11 +38,19 @@ export LD_LIBRARY_PATH=${PWD}
   echo
 } >& ${REFINE_OUT}
 
+# Substitute on POP_C
+if (( ! ${+POP_C} )) 
+then
+  print "Set POP_C!"
+  return 1
+fi
+m4 < diffev_setup.mac.m4 > diffev_setup.mac
+
 turbine -l -n ${PROCS} refine.tcl --cycles=${CYCLES} |& tee -a ${REFINE_OUT}
 echo "logged to: ${REFINE_OUT}"
 
 if grep -q APPL ${REFINE_OUT}
 then
   echo "FOUND ERRORS!"
-  exit 1
+  return 1
 fi
