@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+# Make a movie from a set of PNG images
 
 set -eu
 
