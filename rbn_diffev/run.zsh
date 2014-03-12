@@ -1,13 +1,14 @@
 #!/bin/zsh -e
 
-if [[ ${#*} != 2 ]]
+if [[ ${#*} != 3 ]]
 then
-  echo "usage: run <PROCS> <CYCLES>"
+  print "usage: run <PROCS> <CYCLES> <POP_C>"
   exit 1
 fi
 
 PROCS=$1
 CYCLES=$2
+export POP_C=$3
 
 # Create directories required by the application:
 mkdir -p CALC DIFFEV FINAL
@@ -31,26 +32,24 @@ export PYTHONPATH=${PYTHONPATH}:${PWD}
 export LD_LIBRARY_PATH=${PWD}
 
 {
-  echo ${REFINE_OUT}
+  print ${REFINE_OUT}
   date
   which python
-  echo "PYTHONPATH: ${PYTHONPATH}"
-  echo
+  print "PYTHONPATH: ${PYTHONPATH}"
+  print
 } >& ${REFINE_OUT}
 
-# Substitute on POP_C
-if (( ! ${+POP_C} )) 
-then
-  print "Set POP_C!"
-  return 1
-fi
 m4 < diffev_setup.mac.m4 > diffev_setup.mac
 
+# ulimit -s $(( 128 * 1024 )) # In KB
+
 turbine -l -n ${PROCS} refine.tcl --cycles=${CYCLES} |& tee -a ${REFINE_OUT}
-echo "logged to: ${REFINE_OUT}"
+print "logged to: ${REFINE_OUT}"
 
 if grep -q APPL ${REFINE_OUT}
 then
-  echo "FOUND ERRORS!"
+  print "FOUND ERRORS!"
   return 1
 fi
+
+return 0
