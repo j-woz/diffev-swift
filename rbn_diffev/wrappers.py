@@ -3,6 +3,7 @@
 
 # Goes through each module and wraps all application functions
 # with logging/profiling information
+# Enable this with environment variable DIFFEV_WRAPPERS=1
 
 import os
 from datetime import datetime, timedelta
