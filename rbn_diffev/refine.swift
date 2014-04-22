@@ -305,6 +305,8 @@ main
   // Initialize DIFFEV, currently with fixed macro file name
   // Returns a Python tuple with (gen, mem, child, para)
   //
+  printf("PYTHONPATH: %s", getenv("PYTHONPATH"));
+
   string population = diffev_init("@diffev_start.mac", diffev_process);
   printf(" POPULATION %s \n",population);
 

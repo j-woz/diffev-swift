@@ -59,6 +59,7 @@ for line in content:
         stats[funcname] = []
     stats[funcname].append(d)
 
+print "TOTALS:"
 for f in stats:
     count = len(stats[f])
     print "%-25s %2i  %0.5f" % (f, count, sum(stats[f])/count)

@@ -1,4 +1,4 @@
-#set prompt,redirect
+set prompt,redirect,on
 #set error,exit
 #
 rese
@@ -21,8 +21,8 @@ fclose 1
 if('$1'.eq.'compare') then
   if(generation.eq. 0) then
     do kid=1,member
-      sys "cp CALC/calc.%4D FINAL/initial.%4D",kid ,kid 
-      sys "cp CALC/calc.%4D   FINAL/final.%4D",kid ,kid 
+      sys "cp CALC/calc.%4D FINAL/initial.%4D",kid ,kid
+      sys "cp CALC/calc.%4D   FINAL/final.%4D",kid ,kid
     enddo
   endif
 endif

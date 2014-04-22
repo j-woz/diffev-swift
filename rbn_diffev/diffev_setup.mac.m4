@@ -1,7 +1,15 @@
+
+## M4 stuff:
+changecom(`dnl')
+# We use changecom to change the M4 comment from hash to `dnl'
+# dnl Define a convenience macro
+define(`getenv', `esyscmd(printf -- "$`$1' ")')
+# Created: esyscmd(`date "+%m/%d/%Y %I:%M%p"')
+
 pop_gen[1]  =   0
 #
 pop_n[1]    =  21
-pop_c[1]    =  21
+pop_c[1]    =  getenv(POP_C)
 pop_dimx[1] =   3
 #
 # order parameter [100]
@@ -30,7 +38,7 @@ pop_lsig[2] =     0.0100
 adapt   sigma,  2,0.2
 adapt   lsig ,  2,0.02
 #
-# Atomic displacement parameter 
+# Atomic displacement parameter
 #
 pop_name    3,adp
 type real,3

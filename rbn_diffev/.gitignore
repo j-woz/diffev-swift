@@ -5,6 +5,9 @@ fort.*
 # Swift log
 adlb.clog2
 
+# Turbine output:
+turbine-directory.txt
+
 # Application output:
 CALC
 DIFFEV
